@@ -1,0 +1,168 @@
+-first make venv 
+-then make project(django-admine startproject 'clothstore')
+-then start the app
+
+for making App:
+	-command - python .\manage.py startapp (appname)
+	-go to setting.py>INSTALLED_APPS>['','','','(appname)']
+
+for migration(python .\manage.py makemigrations,python .\manage.py migrate)
+
+to make vertula (python -m venv "name")
+for activate venv ('env name'\script.py\activate.py)
+{# if u want to give column name by ur own
+
+    class Meta:
+        db_table = "productput what u want to give"}
+
+
+{
+	
+# This part return th value not object
+def __str__(self):
+        return self.ColumnName_name
+for admin(python .\manage.py createadminuser)
+
+}
+
+
+{
+all_cat = Category.objects.all() }
+
+for sql query {
+	str(Name.query)
+	}  
+
+
+'''get command use only for uniqe coulmn not for more then one'''
+for get by cloumn name(one_entry = Category.objects.get(id=2) 
+					   print(one_entry))   #for more then one coulmn put '.ColumnName'
+for coulmn or value which is not uniqe use this command = (ProductModel.objects.filter(gender='B'))
+
+
+for multipul output{
+	from django.db.models import Q
+	ProductModel.objects.filter(Q(gender='B') | Q(gender = 'M')) #& ==> and | ==> or
+}
+
+to add new column (query = Category.objects.create(Category_name = 'jackets')
+				   query.save())
+password(django@aavez)
+
+
+for insert in table in bulk {
+	ModelName.Objects.bulk_create([ModelName(colmName1='',ColumnName2=''),ModelName(ColumnName1='',ColumnName2='')])
+}
+
+to get the row with filter {
+	from django.db.models import Q    #import this if u want to use 'Q'
+
+	'''for start value'''
+	ModelName.objects.filter(Q(ColumnName__startswith='Put Value'))	 #if want more filteration but (or, and) condition on it
+	'''for end value'''
+	ModelName.objects.filter(Q(ColumnName__endswith='Put Value'))	
+	'''for get data in asc order'''
+	Modelname.objects.all().order_by('ColumnName') 
+	'''for get data in dcs orede'''
+	Modelname.objects.all().order_by('-ColumnName')	
+	'''for get data by words in contain'''
+	Modelname.objects.filter(columnname__contains = 'put the word what u want to filter')
+
+	for aggregate the table
+	import django.db.models import Max,Min,Avg,Sum
+
+	ModelName.objects.all().aggregate(Avg('ColumnName'))  #for Avrage value of coulmn
+	ModelName.objects.all().aggregate(Sum('ColumnName')) #for sum value of coulmn
+
+	joins{
+		var1 = ModelName.objects.select_related('ColumnName').all()
+		
+
+		'''for better view adding loop'''
+		for i in var1:    
+	     	print('category name = ',i.product_name) 
+
+		'''for foregnkey'''
+		for i in var1:    
+										fk_coumname      pk_coulmname      # fk = foregnkey  , pk = primarykey
+	     	print('category name = ',i.product_categary.category_name) 
+
+
+	}
+}
+
+for tamplates make it in parent folder and go setting and add it in 'DIRS' dect then put ur index.html file there in templates folder
+afer that make a function in viwes.py and register ur index.html file there for example{
+	def home_page(request):
+    	return render(request,'index.html')
+}
+make a urls.py file in app folder and add this for ex {
+	from django.urls import path
+	from . import views              #from views import home_page
+
+	urlpatterns = [
+		path('',views.home_page,name='home'),
+	]
+}
+
+then go in in project level urls.py file then register ur app url ther for example{
+	from django.urls import path,include
+
+	in dic[
+		path('',include('ClothApp.urls')),
+	]
+}
+
+after that make a 'static' named folder in main dir folder to put ur javascpt,cssand font file there
+after that go in project level url.py file and and do this ex{
+	from django.conf import settings                      #import this file
+	from django.conf.urls.static import static
+
+	dict= [] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+}
+
+put this {% load static %} in ur index.html file so ur django can under stand that u will take or use ur css js and font file from static folder
+
+
+
+in views.py file add this in ur methode which u created first for ex{
+	from django.shortcuts import render
+	from .models import ProductModel
+
+	# Create your views here.
+	def home_page(request):
+		all_data = ProductModel.objects.all()
+		context = {
+			'info': all_data
+		}
+		return render(request,'index.html',context)
+}
+in index.html to show ur product put this in ur boxcontainer bu jinja for ex {
+	<div class="row">
+	{% for product in info %}
+	<div class="col-md-3">
+		<div class="card card-product-grid">
+			<a href="./product-detail.html" class="img-wrap"> <img src="{{ product.product_image.url }}"> </a>
+			<figcaption class="info-wrap">
+				<a href="./product-detail.html" class="title">{{ product.product_name }}</a>
+				<div class="price mt-1">Rs {{ product.product_price }}</div> <!-- price-wrap.// -->
+			</figcaption>
+		</div>
+	</div> <!-- col.// -->
+	{% endfor %}
+</div> <!-- row.// -->
+}
+
+for making as like master(inheritance) page {
+	first make a base.html file in templates folder 
+	then make a folder name as inculdes then make 2 file in it and give them name as per ur choise 
+	then make a footer part in ur footer.html file
+	and make haderpart in ur haeder.html
+	then put ur main head conatin in base file the include the header and footer part in it for ex{
+		{% include 'includes/navbar.html' %}
+		{% block content %}
+		{% endblock %}
+
+		{% include 'includes/footer.html' %}
+	}
+}
