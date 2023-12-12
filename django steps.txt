@@ -166,3 +166,16 @@ for making as like master(inheritance) page {
 		{% include 'includes/footer.html' %}
 	}
 }
+
+context_proccer.py (u can give any name to it) is for get the data from database for this there is no use of urls.py(app based) but u hae to say this to ur setting.py file like in setting.py file there is TEMPLATES dict there u have to put in it (syntex=templates=[,,,AppName.FileName.MethodName])for ex{
+	in context_proccer.py(
+		from .models import Category
+
+		def menu_link(request):
+			links =Category.objects.all()
+			return dict(links = links)
+			)
+	in setting.py(
+		templates=[,,,,'ClothApp.context_proccer.menu_link']
+	)
+}
