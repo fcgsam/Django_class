@@ -177,5 +177,7 @@ context_proccer.py (u can give any name to it) is for get the data from database
 			)
 	in setting.py(
 		templates=[,,,,'ClothApp.context_proccer.menu_link']
+
+
 	)
 }
