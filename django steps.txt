@@ -181,3 +181,31 @@ context_proccer.py (u can give any name to it) is for get the data from database
 
 	)
 }
+
+for showing product details by clicking it {
+	first make a file in templates folder ex(product_details.html)
+	in thet file but this skaliten (
+		{% extends 'base.html' %}
+		{% block content %}
+			//code ur all details in it 
+			//get all data from models to show for ex[
+				for image <a href="#"><img src="{{ get_info.product_image.url }}"></a>
+				for product name <h2 class="title">{{ get_info.product_name }}</h2>
+			]
+		{% endblock %}
+	)
+	then in views.py file add a method for ex(
+		def productDetails(request,id):
+		get_data = ProductModel.objects.get(id=id)
+		context ={
+			'get_info' : get_data
+		}
+		return render(request,'product_detail.html',context)
+	)
+	then in App based urls.py file add ur path for ex (
+		path('product-detail/<int:id>/',views.productDetails,name='product-detail'),
+	)
+	then in index.html file to set the path put this so we can click on it and can go to product detail page for ex (
+		<a href="{% url 'product-detail' id=product.id %}" class="img-wrap">
+	)
+}
