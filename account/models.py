@@ -9,20 +9,20 @@ class MyAccountManager(BaseUserManager):
             raise ValueError("User must have an user name")
 
         user = self.model(
-            email = self.normalize_email(email)
-            username = username
-            password = password
-            first_name = first_name
+            email = self.normalize_email(email),
+            username = username,
+            password = password,
+            first_name = first_name,
             last_name= last_name
         )
             
             
         def Create_superuser(self,first_name,last_name,email,username,password):
             user = self.craete_user(
-                email = self.normalize_email(email)
-                username = username
-                password = password
-                first_name = first_name
+                email = self.normalize_email(email),
+                username = username,
+                password = password,
+                first_name = first_name,
                 last_name= last_name
 
             )
