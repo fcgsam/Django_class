@@ -209,3 +209,14 @@ for showing product details by clicking it {
 		<a href="{% url 'product-detail' id=product.id %}" class="img-wrap">
 	)
 }
+
+
+
+
+
+
+
+
+
+
+for making a user form interface make a file as name 'forms.py'
