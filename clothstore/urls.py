@@ -22,4 +22,5 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('ClothApp.urls')),  #if u put ''(empty) then its will take u home page by defoult , this is done for registering the App level url into project level url coz when u go in website then it will come in this url first then this url will locate the app to any other place in app
+    path('accounts/',include('account.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

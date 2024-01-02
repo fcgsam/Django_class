@@ -41,3 +41,4 @@ def search_product(request):
             }
 
             return render(request,'search.html',context)
+        
