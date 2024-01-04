@@ -25,6 +25,23 @@ class RegistrationForm(UserCreationForm):
             'placeholder':'Last Name'
         })
     )
+    username=forms.CharField(
+        max_length=100,
+        required=True,
+        widget=forms.TextInput(attrs={
+            'class':'form-control',
+            'placeholder':'Last Name'
+        })
+    )
+    phone_number =forms.CharField(
+        max_length=10,
+        required=True,
+        widget=forms.TextInput(attrs={
+            'class':'form-control',
+            'placeholder':'Last Name',
+            
+        })
+    )
     email =forms.EmailField(
         max_length=100,
         required=True,
@@ -39,7 +56,7 @@ class RegistrationForm(UserCreationForm):
         widget=forms.PasswordInput(attrs={
             'class':'form-control',
             'placeholder':'Create Password',
-            'type':'password'
+            # 'type':'password'
         })
     )
     password2 =forms.CharField(
@@ -48,6 +65,6 @@ class RegistrationForm(UserCreationForm):
         widget=forms.PasswordInput(attrs={
             'class':'form-control',
             'placeholder':'Confirm Password',
-            'type':'password'
+            # 'type':'password'
         })
     )

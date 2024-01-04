@@ -1,5 +1,5 @@
 -first make venv 
--then make project(django-admine startproject 'clothstore')
+-then make project(django-admin startproject 'clothstore')
 -then start the app
 
 for making App:
