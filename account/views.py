@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .forms import RegistrationForm
+from .forms import RegistrationForm,UserLoginForm
 from django.contrib import messages
 from django.shortcuts import redirect
 
@@ -20,5 +20,9 @@ def registration_form(request):
             return render(request,'register_form.html',{'form_data':form})
 
     return render(request,'register_form.html',{'form_data':form})
+
+def login_form(request):
+    form = UserLoginForm()
+    return render(request,'login.html',{'form_data':form})
     
     

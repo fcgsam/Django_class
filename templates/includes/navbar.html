@@ -1,6 +1,20 @@
 {% load static %}
 
 <header class="section-header">
+    {% if messages %}
+        <div class="container mt-3">
+            {% for message in messages %}
+                {% if message.tags == "success" %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>{{ message }}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %}
+                {% endfor %}
+        </div>
+    {% endif %}
     <nav class="navbar p-md-0 navbar-expand-sm navbar-light border-bottom">
     <div class="container">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,7 +77,7 @@
                         <div class="widget-header">
                             <small class="title text-muted">Welcome guest!</small>
                             <div> 
-                                <a href="./signin.html">Sign in</a> <span class="dark-transp"> | </span>
+                                <a href="{% url 'login' %}">Sign in</a> <span class="dark-transp"> | </span>
                                 <a href="{% url 'register' %}"> Register</a>
                             </div>
                         </div>
