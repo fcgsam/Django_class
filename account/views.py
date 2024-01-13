@@ -2,6 +2,10 @@ from django.shortcuts import render
 from .forms import RegistrationForm,UserLoginForm
 from django.contrib import messages
 from django.shortcuts import redirect
+from django.contrib.auth import authenticate,login,logout
+from django.http import HttpResponse
+from .models import Account
+
 
 # Create your views here.
 def registration_form(request):
@@ -22,7 +26,24 @@ def registration_form(request):
     return render(request,'register_form.html',{'form_data':form})
 
 def login_form(request):
-    form = UserLoginForm()
-    return render(request,'login.html',{'form_data':form})
-    
-    
+    if request.method=="POST":
+        email = request.POST['email']
+        password =request.POST['password']
+        user =Account.objects.get(email=email)
+        result = Account.objects.filter(email__icontains = user).values()
+
+        if user.check_password(password):
+            
+            login(request,user)
+
+            messages.success(request,f'Wellcome {result[0]['username']} You have logged in Successfully.')
+            return redirect('home')
+        else:
+            messages.error(request,'Account not found or Incorrect Credentials')
+    return render(request,'login.html')
+
+def user_logout(request):
+
+    logout(request)
+    messages.success(request,'You have Logged Out')
+    return redirect('home')
