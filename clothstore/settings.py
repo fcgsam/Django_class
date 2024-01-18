@@ -39,11 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ClothApp',
-    'account'
+    'account',
+    'cart'
 ]
 
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'
-SESSION_SAVE_EVERY_REQUEST = True
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -55,9 +55,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',  # Make sure this line is included
-]
+
 
 ROOT_URLCONF = 'clothstore.urls'
 

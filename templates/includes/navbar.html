@@ -74,7 +74,7 @@
         </div> 
         <div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
                     <div class="d-flex justify-content-end mb-3 mb-lg-0">
-                        {{ user }}
+                        {{ user}}
                         <div class="widget-header">
                             {% if user.is_authenticated %}
                                 <small class="title text-muted">Welcome {{user.first_name}}</small>
@@ -82,7 +82,8 @@
                                     <a href="{% url 'logout' %}">Sign Out</a> <span class="dark-transp">
                                 </div>
                             {% else %}
-                                <small class="title text-muted">Welcome guest!</small>
+                            {{ user.first_name }}
+                                <small class="title text-muted">Else Welcome guest!</small>
                                 <div> 
                                     <a href="{% url 'login' %}">Sign in</a> <span class="dark-transp"> | </span>
                                     <a href="{% url 'register' %}"> Register</a>

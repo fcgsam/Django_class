@@ -27,19 +27,22 @@ def registration_form(request):
 
 def login_form(request):
     if request.method=="POST":
-        email = request.POST['email']
-        password =request.POST['password']
-        user =Account.objects.get(email=email)
-        result = Account.objects.filter(email__icontains = user).values()
+        try:
+            email = request.POST['email']
+            password =request.POST['password']
+            user =Account.objects.get(email=email)
+            result = Account.objects.filter(email__icontains = user).values()
 
-        if user.check_password(password):
-            
-            login(request,user)
+            if user.check_password(password):
+                
+                login(request,user)
 
-            messages.success(request,f'Wellcome {result[0]['username']} You have logged in Successfully.')
-            return redirect('home')
-        else:
-            messages.error(request,'Account not found or Incorrect Credentials')
+                messages.success(request,f'Wellcome {result[0]['username']} You have logged in Successfully.')
+                return redirect('home')
+            else:
+                messages.error(request,'Account not found or Incorrect Credentials')
+        except:
+            pass
     return render(request,'login.html')
 
 def user_logout(request):
