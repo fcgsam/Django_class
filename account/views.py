@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 from django.contrib.auth import authenticate,login,logout
 from django.http import HttpResponse
 from .models import Account
+from django.contrib.auth.decorators import  login_required
 
 
 # Create your views here.
@@ -35,7 +36,7 @@ def login_form(request):
 
             if user.check_password(password):
                 
-                login(request,user)
+                login(request,user,backend='account.backends.MyBackEnd')
 
                 messages.success(request,f'Wellcome {result[0]['username']} You have logged in Successfully.')
                 return redirect('home')
@@ -45,6 +46,7 @@ def login_form(request):
             pass
     return render(request,'login.html')
 
+@login_required(login_url='login')
 def user_logout(request):
 
     logout(request)
