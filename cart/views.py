@@ -9,7 +9,7 @@ from django.contrib import messages
 def add_to_cart(request,id):
     items = get_object_or_404(ProductModel,id = id)
 
-    user_id = request.user_id if request.user.is_authenticated else None
+    user_id = request.user.id if request.user.is_authenticated else None
     session_id = request.session.session_key
 
     if not session_id:
@@ -28,11 +28,11 @@ def add_to_cart(request,id):
         cart.items.add(cart_item)
 
     if request.method =='POST':
-        quantity = int(request.POST.get('quentity'),1)
+        quantity = int(request.POST.get('quantity',1))
         if created:
-            cart_item.quentity = quantity
+            cart_item.quantity = quantity
         else:
-            cart_item.quentity +=quantity
+            cart_item.quantity +=quantity
 
         cart_item.save()
 
@@ -46,3 +46,6 @@ def add_to_cart(request,id):
     request.session['total_item_count'] = total_items_count
     return redirect('home')
     
+
+
+

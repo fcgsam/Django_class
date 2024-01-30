@@ -5,7 +5,7 @@ from account.models import Account
 class CartItem(models.Model):
     user = models.ForeignKey(Account,on_delete=models.CASCADE,null = True,blank = True)
     product = models.ForeignKey(ProductModel,on_delete = models.CASCADE)
-    quentity = models.PositiveIntegerField(default =1)
+    quantity = models.PositiveIntegerField(default =1)
     created_at = models.DateTimeField(auto_now_add= True)
 
     def __str__(self):
