@@ -8,6 +8,11 @@ class CartItem(models.Model):
     quantity = models.PositiveIntegerField(default =1)
     created_at = models.DateTimeField(auto_now_add= True)
 
+
+    @property
+    def cost_per_item(self):
+        return self.quantity * self.product.product_price
+
     def __str__(self):
         return f"{self.quentity} X {self.product.product_name}"
 class Cart(models.Model):
